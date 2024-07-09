@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../../Downloads/03.JS-Applications-Data-and-Authentication-Exercise-Resources/server"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "05.Fisher-Game"
+	}
+}
