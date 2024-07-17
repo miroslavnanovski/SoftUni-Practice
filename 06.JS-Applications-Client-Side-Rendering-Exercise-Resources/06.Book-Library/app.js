@@ -14,6 +14,7 @@ window.onload = (event) => {
 async function loadBooks() {
     const response = await api.get(URL);
     const data = Object.values(response);
+    console.log(data);
     renderPage(data);
 }
 
@@ -22,9 +23,10 @@ function renderPage(data) {
         ${createTable(data)}
         ${createForm()}
     `, body);
+    const form = document.getElementById('add-form');
+    form.addEventListener('submit', createBook);
 }
 
-const submitBtn = document.getElementById('submitBtn');
 
 function createTable(data) {
     return html`
@@ -62,4 +64,33 @@ function createForm() {
             <input id='submitBtn' type="submit" value="Submit">
         </form>
     `;
+}
+
+
+
+
+
+// form.addEventListener('submit',createBook);
+
+async function createBook(event){
+    event.preventDefault();
+
+    const form = event.target;
+    const formData = new FormData(form);
+    const author = formData.get('author')
+    const title = formData.get('title');
+
+    if(author === '' || title === ''){
+        return
+    }
+
+    let data = {
+        author,
+        title
+    }
+
+    const response = await api.post(URL,data)
+
+    author = '';
+    title = '';
 }
