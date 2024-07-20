@@ -66,10 +66,6 @@ function createForm() {
     `;
 }
 
-
-
-
-
 // form.addEventListener('submit',createBook);
 
 async function createBook(event){
