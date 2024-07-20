@@ -8,7 +8,7 @@ function getUserData(){
 
 function getToken(){
     const userData = getUserData();
-    const token = userData.accessToken;
+    const token = userData?.accessToken || null;
     return token;
 }
 
@@ -17,9 +17,14 @@ function hasOwner(itemId){
     return userData._id === itemId;
 }
 
+function clearUserData(){
+    sessionStorage.remove('userData');
+}
+
 export const userUtil = {
     setUser,
     getUserData,
     getToken,
-    hasOwner
+    hasOwner,
+    clearUserData
 }

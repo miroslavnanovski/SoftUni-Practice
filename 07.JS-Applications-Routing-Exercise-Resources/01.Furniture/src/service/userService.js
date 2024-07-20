@@ -1,4 +1,5 @@
 import { api } from "../../ultility/requester.js";
+import { userUtil } from "../../ultility/userUtil.js";
 
 const endpoints = {
     register: 'http://localhost:3030/users/register',
@@ -8,13 +9,16 @@ const endpoints = {
 
 
 async function register(data){
-    return await api.post(endpoints.register,data)
+    const userData = await api.post(endpoints.register,data)
+    userUtil.setUser(data);
 }
 async function login(data){
-    return await api.post(endpoints.login,data)
+    const userData =  await api.post(endpoints.login,data)
+    userUtil.setUser(data);
 }
 async function logout(){
-    return await api.get(endpoints.logout)
+     await api.get(endpoints.logout)
+     userUtil.clearUserData();
 }
 
 
