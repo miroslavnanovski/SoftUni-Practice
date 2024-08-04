@@ -4,7 +4,7 @@ import { createFormHandler, getUserData } from '../util.js'
 import { page } from '../lib.js';
 
 
-const detailsTemplate = (data,isOwner,onDelete) => html`
+const detailsTemplate = (data, hasUser, hasLiked, onLike, isOwner,onDelete) => html`
 <section id="details">
     <div id="details-wrapper">
       <img id="details-img" src=${data.imageUrl} alt="example1" />
@@ -22,15 +22,20 @@ const detailsTemplate = (data,isOwner,onDelete) => html`
         <h3>Likes:<span id="likes">0</span></h3>
 
          <!--Edit and Delete are only for creator-->
-         ${isOwner ? html`
+         ${hasUser ? html`
+          
+          ${isOwner ? html`
             <div id="action-buttons">
       <a href="/edit/${data._id}" id="edit-btn">Edit</a>
       <a @click = ${onDelete} href="javascript-void(0)" id="delete-btn">Delete</a>` : null}
 
        <!--Bonus - Only for logged-in users ( not authors )-->
-      <a href="" id="like-btn">Like</a>
-
-    </div>
+       ${hasLiked ? null : html`
+         <a @click =${onLike} href="javascript-void(0)" id="like-btn">Like</a>
+       `}
+    
+    </div>` : null}
+        
       </div>
   </div>
 </section>
@@ -45,9 +50,13 @@ export async function showDetailsPage(ctx){
     const userData = getUserData();
 
     const isOwner = userData ?._id == data._ownerId;
+    const hasLiked = false;
 
+    render(detailsTemplate(data, Boolean(userData), hasLiked, onLike, isOwner,onDelete));
 
-    render(detailsTemplate(data,isOwner,onDelete));
+  async function onLike(){
+
+  }
 
     async function onDelete(){
         const choice = confirm('Are you sure?')
