@@ -2,9 +2,11 @@ import { deleteFact, getFactById } from '../data/operationsTemplate.js';
 import {html,render} from '../lib.js'
 import { createFormHandler, getUserData } from '../util.js'
 import { page } from '../lib.js';
+import { getLikesByFactId, likeFact } from '../data/likes-optional.js';
 
 
-const detailsTemplate = (data, hasUser, hasLiked, onLike, isOwner,onDelete) => html`
+
+const detailsTemplate = (data, likes ,hasUser, hasLiked, onLike, isOwner,onDelete) => html`
 <section id="details">
     <div id="details-wrapper">
       <img id="details-img" src=${data.imageUrl} alt="example1" />
@@ -19,7 +21,7 @@ const detailsTemplate = (data, hasUser, hasLiked, onLike, isOwner,onDelete) => h
                   </p>
         </div>
 
-        <h3>Likes:<span id="likes">0</span></h3>
+        <h3>Likes:<span id="likes">${likes}</span></h3>
 
          <!--Edit and Delete are only for creator-->
          ${hasUser ? html`
@@ -45,17 +47,22 @@ const detailsTemplate = (data, hasUser, hasLiked, onLike, isOwner,onDelete) => h
 export async function showDetailsPage(ctx){
     const id = ctx.params.id;
 
-    const data = await getFactById(id);
+    const [data,likesInfo] = await Promise.all([
+      getFactById(id),
+      getLikesByFactId(id)
+    ])
 
     const userData = getUserData();
 
     const isOwner = userData ?._id == data._ownerId;
-    const hasLiked = false;
+    const hasLiked = likesInfo.hasLiked || isOwner;
 
-    render(detailsTemplate(data, Boolean(userData), hasLiked, onLike, isOwner,onDelete));
+    render(detailsTemplate(data, likesInfo.likes ,Boolean(userData), hasLiked, onLike, isOwner,onDelete));
 
   async function onLike(){
 
+    await likeFact(id)
+    page.redirect('/catalog/' + id)
   }
 
     async function onDelete(){
