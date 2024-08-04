@@ -8,7 +8,7 @@ export const catalogItemTemplate = (data) => html`
       <h3 class="model">${data.model}</h3>
       <p class="year">Year: ${data.year}</p>
       <p class="mileage">Mileage: ${data.mileage} km.</p>
-      <p class="contact">Contact Number: ${data.about}</p>
+      <p class="contact">Contact Number: ${data.contact}</p>
       <a class="details-btn" href="/catalog/${data._id}">More Info</a>
 </div>`;
 
