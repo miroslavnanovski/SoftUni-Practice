@@ -8,6 +8,7 @@ import { showloginPage } from "./views/loginPage.js";
 import { showDetailsPage } from "./views/detailsPage.js";
 import { showRegisterPage } from "./views/registerPage.js";
 import { showEditPage } from "./views/editPage.js";
+import { showSearchPage } from "./views/searchPage.js";
 
 updateNavigation()
 page('/', showHomePage)
@@ -17,6 +18,7 @@ page('/catalog', showCatalogPage)
 page('/create', showCreatePage)
 page('/catalog/:id', showDetailsPage)
 page('/edit/:id',showEditPage)
+page('/search', showSearchPage)
 
 
 page.start();

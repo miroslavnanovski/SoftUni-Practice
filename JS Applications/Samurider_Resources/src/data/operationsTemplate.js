@@ -38,3 +38,8 @@ export async function updateMotor(id,motorData){
 export async function deleteMotor(id){
     return del(endpoints.motorsById + id);
 }
+
+export async function searchMotor(query){
+    const motors = await get(`data/motorcycles?where=model%20LIKE%20%22${query}%22`)
+    return motors;
+}
