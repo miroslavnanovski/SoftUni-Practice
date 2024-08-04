@@ -1,60 +1,74 @@
 import {html,render} from '../lib.js'
 import { createFormHandler } from '../util.js'
 import { page } from '../lib.js'
-import { createFact } from '../data/operationsTemplate.js'
+import {createMotor } from '../data/operationsTemplate.js'
 
 const createPageTemplate = (onCreate) => html`
 <section id="create">
+    <h2>Add Motorcycle</h2>
     <div class="form">
-      <h2>Add Fact</h2>
-      <form @submit=${onCreate} class="create-form">
+      <h2>Add Motorcycle</h2>
+      <form @submit =${onCreate} class="create-form">
         <input
           type="text"
-          name="category"
-          id="category"
-          placeholder="Category"
+          name="model"
+          id="model"
+          placeholder="Model"
         />
         <input
           type="text"
-          name="image-url"
-          id="image-url"
-          placeholder="Image URL"
+          name="imageUrl"
+          id="moto-image"
+          placeholder="Moto Image"
         />
-        <textarea
-        id="description"
-        name="description"
-        placeholder="Description"
-        rows="10"
-        cols="50"
-      ></textarea>
+        <input
+        type="number"
+        name="year"
+        id="year"
+        placeholder="Year"
+      />
+      <input
+      type="number"
+      name="mileage"
+      id="mileage"
+      placeholder="mileage"
+    />
+    <input
+      type="text"
+      name="contact"
+      id="contact"
+      placeholder="contact"
+    />
       <textarea
-        id="additional-info"
-        name="additional-info"
-        placeholder="Additional Info"
+        id="about"
+        name="about"
+        placeholder="about"
         rows="10"
         cols="50"
       ></textarea>
-        <button type="submit">Add Fact</button>
+        <button type="submit">Add Motorcycle</button>
       </form>
     </div>
-  </section>
-`
+  </section>`
 
 export function showCreatePage(){
     render(createPageTemplate(createFormHandler(onCreate)))
 }
 
-async function onCreate({category, 'image-url': imageUrl, description, 'additional-info': moreInfo}){
+async function onCreate({model, imageUrl, year, mileage, contact, about}){
 
-    if(!category || !imageUrl || !description || !moreInfo ){
+    if(!model || !imageUrl || !year || !mileage || !contact || !about ){
         return alert('All fields are required!')
     }
 
-    await createFact(
-        category,
-        imageUrl,
-        description,
-        moreInfo);
+    await createMotor(
+        model,
+        imageUrl, 
+        year, 
+        mileage,
+        contact,
+        about
+       );
 
     page.redirect('/catalog')
 }

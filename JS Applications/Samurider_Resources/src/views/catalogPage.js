@@ -1,19 +1,19 @@
-import { getAllFacts } from "../data/operationsTemplate.js";
+import { getAllMotors } from "../data/operationsTemplate.js";
 import { html, render } from "../lib.js"
 import { catalogItemTemplate } from "./partialView/catalogItem.js";
 
 
-const catalogTemplate = (facts) => html`
-  <h2>Fun Facts</h2>
+const catalogTemplate = (motors) => html`
+  <h2>Available Motorcycles</h2>
   <section id="dashboard">
     <!-- Display a div with information about every post (if any)-->
     
-    ${facts.length ? facts.map(catalogItemTemplate) : html`<h2>No Fun Facts yet.</h2>`}
+    ${motors.length ? motors.map(catalogItemTemplate) : html`<<h2 class="no-avaliable">No avaliable motorcycles yet.</h2>`}
       </section>`
      
 export async function showCatalogPage(){
 
-    const facts = await getAllFacts();
+    const motors = await getAllMotors();
 
-    render(catalogTemplate(facts));
+    render(catalogTemplate(motors));
 }

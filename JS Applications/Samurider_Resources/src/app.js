@@ -11,9 +11,9 @@ import { showEditPage } from "./views/editPage.js";
 
 updateNavigation()
 page('/', showHomePage)
-page('/catalog', showCatalogPage)
 page('/login', showloginPage)
 page('/register', showRegisterPage)
+page('/catalog', showCatalogPage)
 page('/create', showCreatePage)
 page('/catalog/:id', showDetailsPage)
 page('/edit/:id',showEditPage)
@@ -27,5 +27,4 @@ document.querySelector('.logoutBtn').addEventListener('click',function(e){
     logout();
     updateNavigation();
     page.redirect('/');
-
 })

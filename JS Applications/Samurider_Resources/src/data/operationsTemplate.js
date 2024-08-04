@@ -2,38 +2,39 @@ import { get, post, put, del } from "./api.js";
 
 // change to match project endpoints
 const endpoints = {
-    'facts': 'data/facts?sortBy=_createdOn%20desc',
-    'factById': 'data/facts/',
-    'fact' : 'data/facts'
+    'motors': 'data/motorcycles?sortBy=_createdOn%20desc',
+    'motorsById': 'data/motorcycles/',
+    'motor' : 'data/motorcycles'
 }
 
 // change according to project description
-export async function getAllFacts(){
-    return get(endpoints.facts);
+export async function getAllMotors(){
+    return get(endpoints.motors);
 }
 
 // change according to project description
-export async function getFactById(id){
-    return get(endpoints.factById + id);
+export async function getMotorById(id){
+    return get(endpoints.motorsById + id);
 }
 
 // change according to project description
-export async function createFact(category,imageUrl,description,moreInfo){
-    return post(endpoints.fact,{
-        category,
+export async function createMotor(model,imageUrl, year, mileage,contact,about){
+    return post(endpoints.motor,{
+        model,
         imageUrl, 
-        description, 
-        moreInfo
-
+        year, 
+        mileage,
+        contact,
+        about
     })
 }
 
 // change according to project description
-export async function updateFact(id,factData){
-    return put(endpoints.factById + id,factData)
+export async function updateMotor(id,motorData){
+    return put(endpoints.motorsById + id,motorData)
 }
 
 // change according to project description
-export async function deleteFact(id){
-    return del(endpoints.factById + id);
+export async function deleteMotor(id){
+    return del(endpoints.motorsById + id);
 }

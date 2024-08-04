@@ -1,70 +1,88 @@
-import { getFactById,updateFact } from "../data/operationsTemplate.js"; 
+import { getMotorById, updateMotor } from "../data/operationsTemplate.js"; 
 import {html,page,render} from "../lib.js"
 import { createFormHandler } from "../util.js";
 
 const editTemplate = (data,onEdit) => html`
 <section id="edit">
-    <div class="form">
-      <h2>Edit Fact</h2>
-      <form @submit=${onEdit} class="edit-form">
+      <h2>Edit Motorcycle</h2>
+      <div class="form">
+        <h2>Edit Motorcycle</h2>
+        <form @submit=${onEdit} class="edit-form">
+          <input
+            type="text"
+            name="model"
+            id="model"
+            placeholder="Model"
+            .value = ${data.model}
+          />
+          <input
+            type="text"
+            name="imageUrl"
+            id="moto-image"
+            placeholder="Moto Image"
+            .value = ${data.imageUrl}
+          />
+          <input
+          type="number"
+          name="year"
+          id="year"
+          placeholder="Year"
+          .value = ${data.year}
+        />
         <input
-        type="text"
-        name="category"
-        id="category"
-        placeholder="Category"
-        .value = ${data.category}
+        type="number"
+        name="mileage"
+        id="mileage"
+        placeholder="mileage"
+        .value = ${data.mileage}
       />
       <input
-        type="text"
-        name="image-url"
-        id="image-url"
-        placeholder="Image URL"
-        .value = ${data.imageUrl}
+        type="number"
+        name="contact"
+        id="contact"
+        placeholder="contact"
+        .value = ${data.contact}
       />
-      <textarea
-      id="description"
-      name="description"
-      placeholder="Description"
-      rows="10"
-      cols="50"
-      .value = ${data.description}
-    ></textarea>
-    <textarea
-      id="additional-info"
-      name="additional-info"
-      placeholder="Additional Info"
-      rows="10"
-      cols="50"
-      .value = ${data.moreInfo}
-    ></textarea>
-        <button type="submit">Post</button>
-      </form>
+        <textarea
+          id="about"
+          name="about"
+          placeholder="about"
+          rows="10"
+          cols="50"
+          .value = ${data.about}
+        ></textarea>
+          <button type="submit">Edit Motorcycle</button>
+        </form>
     </div>
   </section>`
     
 export async function showEditPage(ctx){
     const id = ctx.params.id;
 
-    const fact = await getFactById(id);
+    const motor = await getMotorById(id);
 
 
-    render(editTemplate(fact,createFormHandler(onEdit)));
+    render(editTemplate(motor,createFormHandler(onEdit)));
 
     async function onEdit({
-        category,
-         'image-url': imageUrl,
-          description,
-        'additional-info': moreInfo}){
-
-            if(!category || !imageUrl || !description || !moreInfo ){
+      model,
+      imageUrl, 
+      year, 
+      mileage,
+      contact,
+      about
+    }){
+            if(!model || !year || !imageUrl || !mileage || !contact || !about ){
                 return alert('All fields are required!')
             }
 
-            await updateFact(id,{
-                category,
-                imageUrl,
-                description,
-                moreInfo});
+            await updateMotor(id,{
+              model,
+              imageUrl, 
+              year, 
+              mileage,
+              contact,
+              about});
         
             page.redirect('/catalog/' + id)
         
