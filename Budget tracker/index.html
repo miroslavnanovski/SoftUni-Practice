@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Budget Tracker</title>
-    <link rel="stylesheet" href="styles.css">.
+    <link rel="stylesheet" href="styles.css">
     <script type="module" src="app.js"></script>
 </head>
 <body>
@@ -12,24 +12,77 @@
     <div class="container">
         <h1>Budget Tracker</h1>
         <div class="balance">
-            Balance: $<span id="balance">0.00</span>
+            Balance: <span id="balance">0.00</span>
+            <span id="currency-symbol">BGN</span>
         </div>
-        <div class="income">
-            <label for="income-description">Income Description</label>
-            <input type="text" id="income-description" placeholder="Enter income description">
-            <label for="income-amount">Amount</label>
-            <input type="number" id="income-amount" placeholder="Enter income amount">
-            <button id="add-income">Add Income</button>
+    
+        <div class="main-wrapper">
+            <div class="main-content">
+                <div class="income">
+                    <label for="income-description">Income Description</label>
+                    <input type="text" id="income-description" placeholder="Enter income description">
+                    
+                    <label for="income-amount">Amount</label>
+                    <input type="number" id="income-amount" placeholder="Enter income amount">
+                    
+                    <label for="income-category">Category</label>
+                    <select id="income-category">
+                        <option value="salary">Salary/Wages</option>
+                        <option value="investments">Investments</option>
+                        <option value="gifts">Gifts</option>
+                        <option value="miscellaneous">Miscellaneous Income</option>
+                    </select>
+                    
+                    <div class="button-group">
+                        <div class="currency-selector">
+                            <label for="currency">Currency:</label>
+                            <select id="currency">
+                                <option value="BGN">лв</option>
+                                <option value="USD">$</option>
+                                <option value="EUR">€</option>
+                                <option value="GBP">£</option>
+                                <option value="JPY">¥</option>
+                            </select>
+                        </div>
+                        <button id="add-income">Add Income</button>
+                        <button id="reset-budget" class="reset-button">Reset Budget</button>
+                    </div>
+                </div>
+    
+                <div class="expense">
+                    <label for="expense-description">Expense Description</label>
+                    <input type="text" id="expense-description" placeholder="Enter expense description">
+                    
+                    <label for="expense-amount">Amount</label>
+                    <input type="number" id="expense-amount" placeholder="Enter expense amount">
+                    
+                    <label for="expense-category">Category</label>
+                    <select id="expense-category">
+                        <option value="housing">Housing</option>
+                        <option value="utilities">Utilities</option>
+                        <option value="transportation">Transportation</option>
+                        <option value="groceries">Groceries</option>
+                        <option value="dining-out">Dining Out</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="debt">Debt Repayment</option>
+                        <option value="savings">Savings & Investments</option>
+                        <option value="education">Education</option>
+                        <option value="personal-care">Personal Care</option>
+                        <option value="entertainment">Entertainment & Recreation</option>
+                        <option value="gifts">Gifts & Donations</option>
+                        <option value="miscellaneous">Miscellaneous</option>
+                    </select>
+                    
+                    <div class="button-group">
+                        <button id="add-expense">Add Expense</button>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Transaction List -->
+            <div class="transaction-list">
+                <h2>Transactions</h2>
+                <ul id="transactions"></ul>
+            </div>
         </div>
-        <div class="expense">
-            <label for="expense-description">Expense Description</label>
-            <input type="text" id="expense-description" placeholder="Enter expense description">
-            <label for="expense-amount">Amount</label>
-            <input type="number" id="expense-amount" placeholder="Enter expense amount">
-            <button id="add-expense">Add Expense</button>
-        </div>
-        <ul id="transactions"></ul>
     </div>
-
-</body>
-</html>
